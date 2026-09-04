@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1788476233 source:c:\projects\studenttrackingsystem\main.c
+	<stdio.h>
+	<stdlib.h>
+	"account.h"
+
+1788478100 c:\projects\studenttrackingsystem\account.h
+
+1788479896 source:c:\projects\studenttrackingsystem\account.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"account.h"
+
