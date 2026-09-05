@@ -166,13 +166,6 @@ void deposeMoney(struct AccountInfo bank[],int customerCount)
     }
 }
 
-
-
-
-
-
-
-
 int findAccountIndex(const struct AccountInfo bank[],int customerCount,int accnum)
 {
     for(int i=0;i<customerCount;i++)
@@ -183,4 +176,72 @@ int findAccountIndex(const struct AccountInfo bank[],int customerCount,int accnu
         }
     }
     return -1;
+}
+
+void moneyTransfer(struct AccountInfo bank[],int customerCount)
+{
+    int receiverIndex,senderIndex;
+    int receiverNum,senderNum;
+    float money;
+
+    if(customerCount == 0)
+    {
+        printf("No accounts registered yet");
+        return;
+    }
+
+    if(customerCount < 2)
+    {
+        printf("Two accounts are required for a money transfer!");
+        return;
+    }
+
+    while(1)
+    {
+     viewBalance(bank , customerCount);
+
+    printf("Enter the sender's account number:");
+    scanf("%d",&senderNum);
+    printf("Enter the receiver's account number:");
+    scanf("%d",&receiverNum);
+
+    cleanBuffer();
+    
+    senderIndex = findAccountIndex(bank,customerCount,senderNum);
+    receiverIndex = findAccountIndex(bank,customerCount,receiverNum);
+
+    if(senderIndex == -1 || receiverIndex == -1)
+    {
+        printf("Please enter a valid account number!\n");
+        continue;
+    }
+
+    if(senderIndex == receiverIndex)
+    {
+        printf(":) Please try again");
+        continue;
+    }
+
+    printf("Enter the amount:");
+    scanf("%f",&money);
+    
+    if(money > bank[senderIndex].balance)
+    {
+        printf("Insufficient balance! Please try again\n");
+        continue;
+    }
+    else if(money <= 0)
+    {
+        printf("Please enter a valid value! Please try again\n\n");
+        continue;
+    } 
+    else
+    { 
+        bank[receiverIndex].balance += money;
+        bank[senderIndex].balance -= money;
+        printf("Successful\n");
+        break;
+
+    }  
+    }  
 }

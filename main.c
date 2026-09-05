@@ -17,6 +17,7 @@ int main()
         printf("2 - View balance\n");
         printf("3 - Deposit money\n");
         printf("4 - Withdraw money\n");
+        printf("5 - Money transfer\n");
         printf("0 - Exit\n");
         printf("Please make a selection:");
         scanf("%d",&selection);
@@ -47,6 +48,10 @@ int main()
                 withdrawMoney(bank, customerCount);
                 break;
 
+            case 5:
+                moneyTransfer(bank,customerCount);
+                break;
+                
             default:
                 printf("Invalid selection. Please try again.");
                 break;
