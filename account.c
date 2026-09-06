@@ -115,6 +115,12 @@ void openAccount(struct AccountInfo bank[],int *customerCount)
 
 void viewBalance(struct AccountInfo bank[],int customerCount)
 {
+    if(customerCount == 0)
+    {
+        printf("No accounts registered yet");
+        return;
+    }
+    
     for(int i=0; i<customerCount;i++)
     {
         printf("\nAccount Number:%d\t Name:%s\t Balance:%.2f\n\n",bank[i].accountNumber,bank[i].name,bank[i].balance);
@@ -244,4 +250,44 @@ void moneyTransfer(struct AccountInfo bank[],int customerCount)
 
     }  
     }  
+}
+
+void deleteAccount(struct AccountInfo bank[],int *customerCount)
+{
+    int accnum;
+    int index;
+
+    if(*customerCount == 0)
+    {
+        printf("No accounts registered yet");
+        return;
+    }
+    while(1)
+    {
+        viewBalance(bank, *customerCount);
+
+        printf("Please enter the account number you wish to delete:");
+        scanf("%d",&accnum);
+
+        cleanBuffer();
+
+        index = findAccountIndex(bank,*customerCount,accnum);
+    
+        if(index == -1)
+        {
+            printf("Please enter a valid account number!\n");
+            continue;
+        }
+        else
+        {
+            for(int i=index; i<*customerCount-1;i++)
+            {
+                bank[i] = bank[i+1];
+            }
+            (*customerCount)--;
+            printf("Successful\n");
+            break;
+        }
+    }
+    
 }

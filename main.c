@@ -18,6 +18,7 @@ int main()
         printf("3 - Deposit money\n");
         printf("4 - Withdraw money\n");
         printf("5 - Money transfer\n");
+        printf("6 - Delete account\n");
         printf("0 - Exit\n");
         printf("Please make a selection:");
         scanf("%d",&selection);
@@ -49,9 +50,13 @@ int main()
                 break;
 
             case 5:
-                moneyTransfer(bank,customerCount);
+                moneyTransfer(bank, customerCount);
                 break;
-                
+            
+            case 6:
+                deleteAccount(bank, &customerCount);
+                break;
+
             default:
                 printf("Invalid selection. Please try again.");
                 break;
