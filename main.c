@@ -8,6 +8,8 @@ int main()
     int customerCount = 0;
     int selection;
 
+    loadAccounts(bank, &customerCount);
+
     while(1)
     {
         system("cls");
@@ -27,6 +29,7 @@ int main()
 
         if(selection==0)
         {
+            saveAccounts(bank, customerCount);
             printf("Logging out...");
             break;
         }
@@ -35,6 +38,7 @@ int main()
         {
             case 1:
                 openAccount(bank, &customerCount);
+                saveAccounts(bank, customerCount);
                 break;
 
             case 2:
@@ -43,18 +47,22 @@ int main()
 
             case 3:
                 deposeMoney(bank , customerCount);
+                saveAccounts(bank, customerCount);
                 break;
 
             case 4:
                 withdrawMoney(bank, customerCount);
+                saveAccounts(bank, customerCount);
                 break;
 
             case 5:
                 moneyTransfer(bank, customerCount);
+                saveAccounts(bank, customerCount);
                 break;
             
             case 6:
                 deleteAccount(bank, &customerCount);
+                saveAccounts(bank, customerCount);
                 break;
 
             default:

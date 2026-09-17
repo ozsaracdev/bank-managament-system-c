@@ -106,7 +106,14 @@ void openAccount(struct AccountInfo bank[],int *customerCount)
         }
     }
     bank[*customerCount].balance = 0.0;
-    bank[*customerCount].accountNumber = 100 + *customerCount;
+    if (*customerCount == 0)
+    {
+        bank[*customerCount].accountNumber = 100;
+    }
+    else 
+    {    
+        bank[*customerCount].accountNumber = bank[*customerCount - 1].accountNumber + 1;
+    }
 
     printf("The account has been opened.\n");
     printf("Account Number:%d\n\n",bank[*customerCount].accountNumber);
@@ -290,4 +297,42 @@ void deleteAccount(struct AccountInfo bank[],int *customerCount)
         }
     }
     
+}
+
+void saveAccounts(const struct AccountInfo bank[], int customerCount)
+{
+    FILE *file = fopen("accounts.dat", "wb");
+    if (file == NULL)
+    {
+        printf("Hata: Dosya kaydedilemedi!\n");
+        return;
+    }
+
+    fwrite(&customerCount, sizeof(int), 1, file);
+
+    if (customerCount > 0)
+    {
+        fwrite(bank, sizeof(struct AccountInfo), customerCount, file);
+    }
+
+    fclose(file); 
+}
+
+void loadAccounts(struct AccountInfo bank[], int *customerCount)
+{
+    FILE *file = fopen("accounts.dat", "rb");
+    if (file == NULL)
+    {
+        *customerCount = 0;
+        return;
+    }
+
+    fread(customerCount, sizeof(int), 1, file);
+
+    if (*customerCount > 0)
+    {
+        fread(bank, sizeof(struct AccountInfo), *customerCount, file);
+    }
+
+    fclose(file); 
 }

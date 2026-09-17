@@ -7,6 +7,8 @@ struct AccountInfo{
     float balance;
 };
 
+void saveAccounts(const struct AccountInfo bank[], int customerCount);
+void loadAccounts(struct AccountInfo bank[], int *customerCount);
 void deposeMoney(struct AccountInfo bank[],int customerCount);
 void viewBalance(struct AccountInfo bank[],int customerCount);
 void openAccount(struct AccountInfo bank[],int *customerCount);
